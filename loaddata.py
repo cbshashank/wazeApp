@@ -8,7 +8,7 @@ def loadNodes(nodeFile):
     for node in file:
         individualNode=node.split()
         nodeID=int(individualNode[0])
-        coordinates=(individualNode[1],individualNode[2])
+        coordinates=(individualNode[2],individualNode[1])
         nodeDict[nodeID]=coordinates
     return nodeDict
 
@@ -45,6 +45,6 @@ def loadPoints(nodefile, edgefile):
     coordinateDict = loadNodes(nodefile)
     edgeConnections = loadEdges(edgefile, 1)
     nodeAdj = mapAdjacent(edgeConnections)
-
+    print(nodeAdj[2])
 
 
