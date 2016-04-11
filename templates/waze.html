@@ -85,22 +85,23 @@ function initMap() {
         zoom: 6
     });
     {%  for items in vertices%}
+        var markerinfo='Node ID: {{ items }} </br> lat: {{ vertices[items][0]}}, lng:{{ vertices[items][1]}}';
+        var infowindow{{ items }} = new google.maps.InfoWindow({
+        content: markerinfo
+        });
         var latlng = {lat: {{ vertices[items][0]}}, lng: {{ vertices[items][1]}}};
         var marker{{ items }} = new google.maps.Marker({
             position: latlng,
             map: map,
             title: 'nodeID: {{ items }}'
         });
+        marker{{ items }}.addListener('click', function() {
+            infowindow{{ items }}.open(map, marker{{ items }});
+         });
 
 {% endfor %}
 
 }
-    google.maps.event.addListener(map, 'click', function(event) {
-     new google.maps.InfoWindow({
-          position: event.latLng,
-          content: event.latLng.toString()
-        }).open(map);
-     });
 
 
 
