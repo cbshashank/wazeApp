@@ -72,10 +72,12 @@
         <span class="onoffswitch-switch"></span>
     </label>
 </div>
+<div style="text-align: center"> <h1>Waze App EC504</h1></div>
 <div>
 
 </div>
 <div id="map"></div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
 
 var map;
@@ -85,9 +87,9 @@ function initMap() {
         zoom: 6
     });
     {%  for items in vertices%}
-        var markerinfo='Node ID: {{ items }} </br> lat: {{ vertices[items][0]}}, lng:{{ vertices[items][1]}}';
+        var markerinfo = 'Node ID: {{ items }} </br> lat: {{ vertices[items][0]}}, lng:{{ vertices[items][1]}}';
         var infowindow{{ items }} = new google.maps.InfoWindow({
-        content: markerinfo
+            content: markerinfo
         });
         var latlng = {lat: {{ vertices[items][0]}}, lng: {{ vertices[items][1]}}};
         var marker{{ items }} = new google.maps.Marker({
@@ -95,17 +97,73 @@ function initMap() {
             map: map,
             title: 'nodeID: {{ items }}'
         });
-        marker{{ items }}.addListener('click', function() {
+        marker{{ items }}.addListener('click', function () {
             infowindow{{ items }}.open(map, marker{{ items }});
-         });
+        });
 
-{% endfor %}
+        marker{{ items }}.addListener('click', function () {
+            var id = {{ items }}
+                    $.ajax({url: '/', data: "" + id, type: 'POST'});
+        });
 
-}
+        marker{{ items }}.addListener('click', function () {
+            getEdge();
+        });
+
+
+
+    {% endfor %}
+
+    function getEdge() {
+        $.getJSON('/edges', function (data) {
+            var points = [];
+            for (var i in data) {
+                var item=data[i]
+                points.push({
+                    "lat"   : Number(item.lat),
+                    "lng"   : Number(item.lng)
+                })
+            };
+
+            drawEdge(points)
+        });
+        function drawEdge(points) {
+            console.log(points);
+            var edgeDraw = new google.maps.Polyline({
+                path: points,
+                geodesic: true,
+                strokeColor: '#34A7C1',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+            edgeDraw.setMap(map);
+        };
+    };
+};
+{#    var edges = [#}
+{#        {%for coordinates in getEdges() %}#}
+{#            {lat: {{ coordinates[0] }}, lng: {{coordinates[1]}}},#}
+{#        {% endfor %}#}
+{#        {lat: {{ edgeMapList[-1][0] }}, lng:{{edgeMapList[-1][1]}}}#}
+{#
+{#    ];#}
+{#    console.log(edges)#}
+{#    var edgeDraw = new google.maps.Polyline({#}
+{#        path: edges,#}
+{#        geodesic: true,#}
+{#        strokeColor: '#34A7C1',#}
+{#        strokeOpacity: 1.0,#}
+{#        strokeWeight: 2#}
+{#    });#}
+{#    console.log(edges)#}
+{#edgeDraw.setMap(map);#}
+{##}
+
 
 
 
 </script>
+
 <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLS55jIUm4MFlRskfhOq6l3WxYHuCNd8&callback=initMap&language=en">
     </script>
