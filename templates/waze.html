@@ -7,6 +7,7 @@
 
     html, body {
           height: 100%; margin: 0; padding: 0;
+
         }
       #map {
           margin-top:5%;
@@ -65,7 +66,7 @@
     <title>EC504 Waze App</title>
 </head>
 <body>
-<div class="onoffswitch">
+<div class="onoffswitch" style="vertical-align: bottom;">
     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
     <label class="onoffswitch-label" for="myonoffswitch">
         <span class="onoffswitch-inner"></span>
@@ -143,24 +144,7 @@ function initMap() {
         };
     };
 };
-{#    var edges = [#}
-{#        {%for coordinates in getEdges() %}#}
-{#            {lat: {{ coordinates[0] }}, lng: {{coordinates[1]}}},#}
-{#        {% endfor %}#}
-{#        {lat: {{ edgeMapList[-1][0] }}, lng:{{edgeMapList[-1][1]}}}#}
-{#
-{#    ];#}
-{#    console.log(edges)#}
-{#    var edgeDraw = new google.maps.Polyline({#}
-{#        path: edges,#}
-{#        geodesic: true,#}
-{#        strokeColor: '#34A7C1',#}
-{#        strokeOpacity: 1.0,#}
-{#        strokeWeight: 2#}
-{#    });#}
-{#    console.log(edges)#}
-{#edgeDraw.setMap(map);#}
-{##}
+
 
 
 
