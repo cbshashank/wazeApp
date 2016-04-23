@@ -1,0 +1,31 @@
+digraph network { 
+	rankdir=TB;
+	node [shape=circle, style=filled]
+	edge [minlen=2]
+	
+	/* Nodes */
+	
+	
+	/* Edges */
+	
+	
+	/* Nodes that have the same rank. */
+	
+	
+		// Source Node
+	// Sink Node
+	
+	/* Legend */
+	subgraph legend {
+		rankdir=TB;
+		rank="same";
+		
+		"legend1" [shape=none, fillcolor="white", fontname="monospace", fontcolor="white", label=<
+			<TABLE BORDER="0">
+				<TR><TD>                    </TD></TR>
+				<TR><TD>                    </TD></TR>
+				<TR><TD>                    </TD></TR>
+				<TR><TD>                    </TD></TR>
+			</TABLE>>]
+	}
+}

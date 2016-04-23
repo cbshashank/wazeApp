@@ -16,66 +16,17 @@
       .buttonHolder{
           text-align: center;
       }
-.onoffswitch {
-    position: relative; width: 136px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-}
-.onoffswitch-checkbox {
-    display: none;
-}
-.onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 17px;
-}
-.onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 44px; padding: 0; line-height: 44px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    box-sizing: border-box;
-}
-.onoffswitch-inner:before {
-    content: "Directions";
-    padding-left: 10px;
-    background-color: #34A7C1; color: #FFFFFF;
-}
-.onoffswitch-inner:after {
-    content: "Edges";
-    padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
-    text-align: right;
-}
-.onoffswitch-switch {
-    display: block; width: 18px; margin: 13px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
-    right: 88px;
-    border: 2px solid #999999; border-radius: 17px;
-    transition: all 0.3s ease-in 0s;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px;
-}
 
     </style>
     <title>EC504 Waze App</title>
 </head>
 <body>
-<div class="onoffswitch" style="vertical-align: bottom;">
-    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-    <label class="onoffswitch-label" for="myonoffswitch">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-    </label>
-</div>
-<div style="text-align: center"> <h1>Waze App EC504</h1></div>
-<div>
 
+<div style="text-align: center"> <h1>Waze App EC504</h1></div>
+<div style="text-align: center"> <h1>Edges</h1></div>
+
+<div style="text-align: left">
+    <a href="directions"><h2>Directions</h2></a>
 </div>
 <div id="map"></div>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -119,17 +70,15 @@ function initMap() {
         $.getJSON('/edges', function (data) {
             var points = [];
             for (var i in data) {
-                var item=data[i]
+                var item=data[i];
                 points.push({
                     "lat"   : Number(item.lat),
                     "lng"   : Number(item.lng)
                 })
             };
-            if (!document.getElementById("myonoffswitch").checked)
-            {
-                drawEdge(points);
+            drawEdge(points);
 
-            }
+
         });
         function drawEdge(points) {
             console.log(points);
@@ -138,7 +87,7 @@ function initMap() {
                 geodesic: true,
                 strokeColor: '#34A7C1',
                 strokeOpacity: 1.0,
-                strokeWeight: 2
+                strokeWeight: 4
             });
             edgeDraw.setMap(map);
         };

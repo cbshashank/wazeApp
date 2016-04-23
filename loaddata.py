@@ -39,7 +39,7 @@ def mapAdjacent(edges):
          nodeEdges[(edges[edge][1])].append(edge)
     return nodeEdges
 
-#This returns a dictionary that maps each  node ID to a tuple that has it's edge coordinates
+#This returns a list tuples that correspond to a node's edges coordintes
 def edgeMap(node, nodeFile, edgeFile):
     edgeMapList=[]
     coordinateDict = loadNodes(nodeFile)
@@ -63,4 +63,5 @@ def loadPoints(nodefile, edgefile):
     # print (edgeConnections[2])
     # print(edgeConnections[3])
     print( edgeMap(None, nodefile, edgefile)[-1][1])
+
 
