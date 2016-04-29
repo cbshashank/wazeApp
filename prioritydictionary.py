@@ -1,35 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  prioritydictionary.py
-#  
-#  Copyright 2002 David Eppstein, UC Irvine
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#
-# http://code.activestate.com/recipes/117228/
-# 
+# Modified code from https://github.com/Pent00/YenKSP.
+
+
 from __future__ import generators
 
 class priorityDictionary(dict):
     def __init__(self):
-        '''Initialize priorityDictionary by creating binary heap of pairs 
-        (value,key).  Note that changing or removing a dict entry will not 
-        remove the old pair from the heap until it is found by smallest() or
-		until the heap is rebuilt.'''
         self.__heap = []
         dict.__init__(self)
 

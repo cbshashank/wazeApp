@@ -1,50 +1,12 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  algorithms.py
-#  
-#  Copyright 2012 Kevin R <KRPent@gmail.com>
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#
-# 
+# Modified code from https://github.com/Pent00/YenKSP.
+
 from operator import itemgetter
 from prioritydictionary import priorityDictionary
 from graph import DiGraph
 
 
-## @package YenKSP
 # Computes K-Shortest Paths using Yen's Algorithm.
-#
-# Yen's algorithm computes single-source K-shortest loopless paths for a graph 
-# with non-negative edge cost. The algorithm was published by Jin Y. Yen in 1971
-# and implores any shortest path algorithm to find the best path, then proceeds 
-# to find K-1 deviations of the best path.
-
-## Computes K paths from a source to a sink in the supplied graph.
-#
-# @param graph A digraph of class Graph.
-# @param start The source node of the graph.
-# @param sink The sink node of the graph.
-# @param K The amount of paths being computed.
-#
-# @retval [] Array of paths, where [0] is the shortest, [1] is the next 
-# shortest, and so on.
-#
-def ksp_yen(graph, node_start, node_end, max_k=2):
+def ksp_yen(graph, node_start, node_end, max_k):
     distances, previous = dijkstra(graph, node_start)
     
     A = [{'cost': distances[node_end], 
@@ -90,14 +52,6 @@ def ksp_yen(graph, node_start, node_end, max_k=2):
     return A
 
 ## Computes the shortest path from a source to a sink in the supplied graph.
-#
-# @param graph A digraph of class Graph.
-# @param node_start The source node of the graph.
-# @param node_end The sink node of the graph.
-#
-# @retval {} Dictionary of path and cost or if the node_end is not specified,
-# the distances and previous lists are returned.
-#
 def dijkstra(graph, node_start, node_end=None):
     distances = {}      
     previous = {}       
@@ -129,14 +83,6 @@ def dijkstra(graph, node_start, node_end=None):
         return (distances, previous)
 
 ## Finds a paths from a source to a sink using a supplied previous node list.
-#
-# @param previous A list of node predecessors.
-# @param node_start The source node of the graph.
-# @param node_end The sink node of the graph.
-#
-# @retval [] Array of nodes if a path is found, an empty list if no path is 
-# found from the source to sink.
-#
 def path(previous, node_start, node_end):
     route = []
 

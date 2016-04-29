@@ -55,13 +55,3 @@ def edgeMap(node, nodeFile, edgeFile):
         return edgeMapList
 
 
-def loadPoints(nodefile, edgefile):
-    # coordinateDict = loadNodes(nodefile)
-    # edgeConnections = loadEdges(edgefile, 1)
-    # nodeAdj = mapAdjacent(edgeConnections)
-    # print(nodeAdj[2])
-    # print (edgeConnections[2])
-    # print(edgeConnections[3])
-    print( edgeMap(None, nodefile, edgefile)[-1][1])
-
-

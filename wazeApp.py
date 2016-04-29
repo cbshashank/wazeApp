@@ -3,14 +3,16 @@ import loaddata
 import json
 from flask import Flask, render_template, request
 from directions import getDirections
-nodedirectory="/Users/shashank/Documents/school/Spring2016/ds2/wazeApp/cal.cnode.txt"
-edgedirectory="/Users/shashank/Documents/school/Spring2016/ds2/wazeApp/cal.cedge.txt"
+nodedirectory="/Users/shashank/Documents/school/Spring2016/ds2/wazeApp_ec504-master/cal.cnode.txt"
+edgedirectory="/Users/shashank/Documents/school/Spring2016/ds2/wazeApp_ec504-master/cal.cedge.txt"
+
 coordinateDict={}
 edgeConnections={}
 edgeDistance={}
 nodeAdj={}
 
 
+#This is the default page; highlighting adjacent edges occurs here
 app = Flask(__name__)
 vertices = loaddata.loadNodes(nodedirectory)
 x=None
@@ -27,6 +29,8 @@ def index():
 
 directionNodes=[]
 paths=[]
+
+# This is the page to receive shortest paths.
 @app.route('/directions', methods=['GET', 'POST'])
 def directions():
     global vertices
@@ -45,6 +49,7 @@ def directions():
     else:
         return render_template("directions.html", vertices=vertices)
 
+# This is where edges are fetched for the default page to draw adjacent edges
 @app.route('/edges', methods=['GET'])
 def setedges():
     edgeMapList = loaddata.edgeMap(x, nodedirectory, edgedirectory)
@@ -57,7 +62,7 @@ def setedges():
     return json.dumps(fullEdgeList, ensure_ascii=False)
 
 
-
+# This is where distances are fetched for the shortest path page to get data
 @app.route('/distance', methods=['GET'])
 def distance():
     global paths
@@ -67,7 +72,7 @@ def distance():
     path1list.append(paths[2]['cost'])
     return json.dumps(path1list, ensure_ascii=False)
 
-
+# This is where path 1 info is fetched to draw path 1
 @app.route('/path1', methods=['GET'])
 def path1():
     global paths
@@ -82,6 +87,7 @@ def path1():
         fullpathlist.append(edgeDic)
     return json.dumps(fullpathlist, ensure_ascii=False)
 
+# This is where path 2 info is fetched to draw path 2
 @app.route('/path2', methods=['GET'])
 def path2():
     global paths
@@ -96,7 +102,7 @@ def path2():
         fullpathlist.append(edgeDic)
     return json.dumps(fullpathlist, ensure_ascii=False)
 
-
+# This is where path 3 info is fetched to draw path 3
 @app.route('/path3', methods=['GET'])
 def path3():
     global paths
@@ -114,18 +120,3 @@ def path3():
 
 if __name__ == '__main__':
     app.run()
-    # loaddata.loadPoints("/Users/shashank/Documents/school/Spring2016/ds2/wazeApp/cal.cnode.txt","/Users/shashank/Documents/school/Spring2016/ds2/wazeApp/cal.cedge.txt")
-    # global vertices
-    #
-    # print pathlist
-    # paths = getDirections('1', '4')
-    # path1list = []
-    # for edge in paths[0]['path']:
-    #     path1list.append(vertices[int(edge)])
-    # print path1list
-    # fullpathlist = []
-    # for coordinate in path1list:
-    #     edgeDic = {}
-    #     edgeDic["lat"] = coordinate[0]
-    #     edgeDic["lng"] = coordinate[1]
-    #     fullpathlist.append(edgeDic)
